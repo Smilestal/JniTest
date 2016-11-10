@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/view_main"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--圆角图片-->
+    <com.example.androidexp.Views.DoubleImageView
+        android:id="@+id/iv_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/black"
+        app:corner_radius="2.5dp"
+        app:leftBottom_angle="true"
+        app:leftTop_angle="true"
+        app:rightBottom_angle="true"
+        app:rightTop_angle="true" />
+
+    <Button
+        android:id="@+id/btn_drag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DragActivity"/>
+
+    <Button
+        android:id="@+id/btn_custom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CustomDialog"/>
+
+    <Button
+        android:id="@+id/btn_wheel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WheelPopupWindow"/>
+
+    <com.example.androidexp.Views.SwitchView
+        android:id="@+id/view_switch"
+        android:layout_width="60dip"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="25dp" />
+
+</LinearLayout>
