@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app 通用 -->
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="titleColor">#FFF9F9F9</color>
+    <color name="line">#FFE9E9E9</color>
+    <color name="pageBgColor">#F0F0F0</color>
+    <color name="black">#000000</color>
+    <color name="bg_Gray">#E5E5E5</color>
+
+    <!--字体颜色-->
+    <color name="greyishBrown">#4A4A4A</color>
+    <color name="warmGrey">#9B9B9B</color>
+    <color name="paleRed">#DD3333</color>
+    <color name="blackTwo">#232323</color>
+    <color name="whiteTwo">#D8D8D8</color>
+    <color name="whiteThree">#DEDEDE</color>
+    <color name="whiteFour">#F6F6F6</color>
+    <color name="whiteFive">#F4F4F4</color>
+    <color name="whiteSix">#EBEBEB</color>
+    <color name="whiteSeven">#F9F9F9</color>
+    <color name="whiteEight">#F5F5F5</color>
+    <color name="whiteNine">#F3F3F3</color>
+</resources>
