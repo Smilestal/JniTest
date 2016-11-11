@@ -1,5 +1,8 @@
 package com.example.androidexp.Utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by POST on 2016/11/10.
  */
@@ -24,6 +27,15 @@ public class StringUtils {
             }
         }
         return true;
+    }
+
+    /**
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isBlank(String str) {
+        return (str == null || str.trim().length() == 0);
     }
 
     /**
@@ -133,5 +145,68 @@ public class StringUtils {
                 result++;
         }
         return result;
+    }
+
+    /**
+     * 半角字符转化为全角字符
+     *
+     * @param input 要转化的字符
+     * @return 转化后的结果
+     */
+    public static String ToDBC(String input) {
+        char[] c = input.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] == 12288) {
+                c[i] = (char) 32;
+                continue;
+            }
+            if (c[i] > 65280 && c[i] < 65375)
+                c[i] = (char) (c[i] - 65248);
+        }
+        return new String(c);
+    }
+
+    /**
+     * 整数转字节数组
+     *
+     * @param i
+     * @return
+     */
+    public static byte[] intToByte(int i) {
+        byte[] bt = new byte[4];
+        bt[0] = (byte) (0xff & i);
+        bt[1] = (byte) ((0xff00 & i) >> 8);
+        bt[2] = (byte) ((0xff0000 & i) >> 16);
+        bt[3] = (byte) ((0xff000000 & i) >> 24);
+        return bt;
+    }
+
+    /**
+     * 字节数组转整数
+     *
+     * @param bytes
+     * @return
+     */
+    public static int bytesToInt(byte[] bytes) {
+        int num = bytes[0] & 0xFF;
+        num |= ((bytes[1] << 8) & 0xFF00);
+        num |= ((bytes[2] << 16) & 0xFF0000);
+        num |= ((bytes[3] << 24) & 0xFF000000);
+        return num;
+    }
+
+    /**
+     * 判断是否全为数字
+     *
+     * @param content
+     * @return
+     */
+    public static boolean isAllNumber(String content) {
+        if (isNullOrEmpty(content)) {
+            return false;
+        }
+        Pattern p = Pattern.compile("\\-*\\d+");
+        Matcher m = p.matcher(content);
+        return m.matches();
     }
 }
