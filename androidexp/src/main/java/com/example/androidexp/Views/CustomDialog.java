@@ -73,6 +73,12 @@ public class CustomDialog extends Dialog {
             return this;
         }
 
+        /**
+         * 设置用户自定义布局
+         *
+         * @param v
+         * @return
+         */
         public Builder setContentView(View v) {
             this.contentView = v;
             return this;
@@ -84,102 +90,94 @@ public class CustomDialog extends Dialog {
          * @param positiveButtonText
          * @return
          */
-        public Builder setPositiveButton(int positiveButtonText,
-                                         OnClickListener listener) {
-            this.positiveButtonText = (String) context
-                    .getText(positiveButtonText);
+        public Builder setPositiveButton(int positiveButtonText, OnClickListener listener) {
+            this.positiveButtonText = (String) context.getText(positiveButtonText);
             this.positiveButtonClickListener = listener;
             return this;
         }
 
-        public Builder setPositiveButton(String positiveButtonText,
-                                         OnClickListener listener) {
+        public Builder setPositiveButton(String positiveButtonText, OnClickListener listener) {
             this.positiveButtonText = positiveButtonText;
             this.positiveButtonClickListener = listener;
             return this;
         }
 
-        public Builder setNegativeButton(int negativeButtonText,
-                                         OnClickListener listener) {
-            this.negativeButtonText = (String) context
-                    .getText(negativeButtonText);
+        public Builder setNegativeButton(int negativeButtonText, OnClickListener listener) {
+            this.negativeButtonText = (String) context.getText(negativeButtonText);
             this.negativeButtonClickListener = listener;
             return this;
         }
 
-        public Builder setNegativeButton(String negativeButtonText,
-                                         OnClickListener listener) {
+        public Builder setNegativeButton(String negativeButtonText, OnClickListener listener) {
             this.negativeButtonText = negativeButtonText;
             this.negativeButtonClickListener = listener;
             return this;
         }
 
+        //根据用户设值加载布局，创建提示框
         public CustomDialog create() {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            // instantiate the dialog with the custom Theme
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final CustomDialog dialog = new CustomDialog(context, R.style.Dialog);
             View layout = inflater.inflate(R.layout.dialog_normal_layout, null);
+
             dialog.addContentView(layout, new LayoutParams(
                     LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            //点击外部Dialog是否取消
             dialog.setCanceledOnTouchOutside(false);
-            // set the dialog title
-            ((TextView) layout.findViewById(R.id.title)).setText(title);
-            // set the confirm button
+
+            TextView tvTitle = (TextView) layout.findViewById(R.id.title);
+            TextView positiveButton = (TextView) layout.findViewById(R.id.positiveButton);
+            TextView negativeButton = (TextView) layout.findViewById(R.id.negativeButton);
+            TextView tvMessage = (TextView) layout.findViewById(R.id.message);
+            LinearLayout view_content = (LinearLayout) layout.findViewById(R.id.content);
+
+            //设置标题
+            tvTitle.setText(title);
+            //设置确定按钮
             if (positiveButtonText != null) {
-                ((TextView) layout.findViewById(R.id.positiveButton))
-                        .setText(positiveButtonText);
+                positiveButton.setText(positiveButtonText);
                 if (positiveButtonClickListener != null) {
-                    ((TextView) layout.findViewById(R.id.positiveButton))
-                            .setOnClickListener(new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    positiveButtonClickListener.onClick(dialog,
-                                            DialogInterface.BUTTON_POSITIVE);
-                                    dialog.dismiss();
-                                }
-                            });
+                    positiveButton.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            positiveButtonClickListener.onClick(dialog,
+                                    DialogInterface.BUTTON_POSITIVE);
+                            dialog.dismiss();
+                        }
+                    });
                 }
             } else {
-                // if no confirm button just set the visibility to GONE
-                layout.findViewById(R.id.positiveButton).setVisibility(
-                        View.GONE);
+                //如果确定按钮的值为空则隐藏
+                positiveButton.setVisibility(View.GONE);
             }
-            // set the cancel button
+
+            //设置取消按钮
             if (negativeButtonText != null) {
-                ((TextView) layout.findViewById(R.id.negativeButton))
-                        .setText(negativeButtonText);
+                negativeButton.setText(negativeButtonText);
                 if (negativeButtonClickListener != null) {
-                    ((TextView) layout.findViewById(R.id.negativeButton))
-                            .setOnClickListener(new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    negativeButtonClickListener.onClick(dialog,
-                                            DialogInterface.BUTTON_NEGATIVE);
-                                    dialog.dismiss();
-                                }
-                            });
+                    negativeButton.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            negativeButtonClickListener.onClick(dialog,
+                                    DialogInterface.BUTTON_NEGATIVE);
+                            dialog.dismiss();
+                        }
+                    });
                 }
             } else {
-                // if no confirm button just set the visibility to GONE
-                layout.findViewById(R.id.negativeButton).setVisibility(
-                        View.GONE);
+                //如果取消按钮为空则隐藏
+                negativeButton.setVisibility(View.GONE);
             }
-            // set the content message
+
+            //设置提示内容
             if (message != null) {
-                ((TextView) layout.findViewById(R.id.message)).setText(message);
+                tvMessage.setText(message);
             } else if (contentView != null) {
-                // if no message set
-                // add the contentView to the dialog body
-                ((LinearLayout) layout.findViewById(R.id.content))
-                        .removeAllViews();
-                ((LinearLayout) layout.findViewById(R.id.content)).addView(
-                        contentView, new LayoutParams(
-                                LayoutParams.MATCH_PARENT,
-                                LayoutParams.MATCH_PARENT));
+                //如果提示内容为空则移除布局使用用户设置的布局
+                view_content.removeAllViews();
+                view_content.addView(contentView, new LayoutParams(
+                        LayoutParams.MATCH_PARENT,
+                        LayoutParams.MATCH_PARENT));
             }
             dialog.setContentView(layout);
             return dialog;
         }
-
     }
 }
