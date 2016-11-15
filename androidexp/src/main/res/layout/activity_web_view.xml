@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:WebViewWithProgress="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.androidexp.Views.WebViewWithProgress
+        android:id="@+id/details_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        WebViewWithProgress:progressStyle="horizontal" />
+
+</RelativeLayout>

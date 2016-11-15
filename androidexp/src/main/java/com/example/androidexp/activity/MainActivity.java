@@ -1,4 +1,4 @@
-package com.example.androidexp.activity;
+package com.example.androidexp.Activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,6 +25,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button btn_drag;
     Button btn_custom;
     Button btn_wheel;
+    Button btn_webView;
+    Button btn_navigation;
     SwitchView view_switch;
 
     private int selectIndex = 0;
@@ -44,6 +46,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btn_custom.setOnClickListener(this);
         btn_wheel = (Button) findViewById(R.id.btn_wheel);
         btn_wheel.setOnClickListener(this);
+        btn_webView = (Button) findViewById(R.id.btn_webView);
+        btn_webView.setOnClickListener(this);
+        btn_navigation = (Button) findViewById(R.id.btn_navigation);
+        btn_navigation.setOnClickListener(this);
 
         view_switch = (SwitchView) findViewById(R.id.view_switch);
         view_switch.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
@@ -67,6 +73,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch (v.getId()){
             case R.id.btn_drag:
                 intent = new Intent(this, DragActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btn_webView:
+                intent = new Intent(this, WebViewActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btn_navigation:
+                intent = new Intent(this, NavigationActivity.class);
                 startActivity(intent);
                 break;
 
